@@ -3,12 +3,21 @@ import datetime
 from django.db import models
 
 # Create your models here.
+'''
+Class model to define Question:
+Input from the user = question_text:
+When published from the user = pub_date:  
+'''
 
 class Question(models.Model):
     question_text = models.CharField(max_length=200)
     pub_date = models.DateTimeField('date published')
     
-    
+'''
+Defintion function when it was published
+
+    return question_text
+'''
 def was_published_recently(self):
     now = timezone.now()
     return now - datetime.timedelta(days=1) <= self.pub_date <= now
@@ -17,6 +26,15 @@ def was_published_recently(self):
         return self.question_text
 
 
+'''
+Class function for Choice:
+
+question from user: = question
+option text = choice_text
+option to vote = votes 
+
+    return choice text with a def funtion.
+'''
 class Choice(models.Model):
     question = models.ForeignKey(Question, on_delete=models.CASCADE)
     choice_text = models.CharField(max_length=200)
